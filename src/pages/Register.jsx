@@ -7,7 +7,7 @@ import {
   Typography,
   Grid,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { registerUser } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

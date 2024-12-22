@@ -3,7 +3,6 @@ import {
   Card,
   CardContent,
   Typography,
-  Avatar,
   Grid,
   Box,
   Button,
