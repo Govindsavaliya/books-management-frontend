@@ -145,14 +145,6 @@ const BookList = () => {
                                                 },
                                             }}
                                         >
-                                            {book.image && (
-                                                <CardMedia
-                                                    component="img"
-                                                    height="200"
-                                                    image={book.image}
-                                                    alt={book.title}
-                                                />
-                                            )}
                                             <CardContent
                                                 sx={{
                                                     display: "flex",
@@ -169,13 +161,13 @@ const BookList = () => {
                                                         color: "#90caf9", // Title with a custom color
                                                     }}
                                                 >
-                                                    {book.title}
+                                                    {book?.title}
                                                 </Typography>
                                                 <Typography
                                                     variant="body2"
                                                     style={{ textAlign: "center", color: "#b0bec5" }}
                                                 >
-                                                    Author: {book.author}
+                                                    Author: {book?.author}
                                                 </Typography>
                                             </CardContent>
                                         </Card>

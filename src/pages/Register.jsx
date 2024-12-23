@@ -24,9 +24,8 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerUser({ firstName, lastName, email, password, confirmPassword })).unwrap()
-      .then((message) => {
-        console.log("🚀 ~ .then ~ message:", message)
-        toast.success("Registration successful!");
+      .then((messageInfo) => {
+        toast.success(messageInfo?.message || "Registration successful!");
         navigate("/login");
         setFirstName("");
         setLastName("");
@@ -35,13 +34,13 @@ const Register = () => {
         setConfirmPassword("");
       })
       .catch((error) => {
-        if (error.errors) {
-          error.errors.forEach((error) => {
-            toast.error(`${error.msg}`);
+        if (error?.errors) {
+          error?.errors.forEach((error) => {
+            toast.error(`${error?.msg}`);
           });
         }
-        else if (error.message) {
-          toast.error(error.message);
+        else if (error?.message) {
+          toast.error(error?.message);
         } else {
           toast.error("An unexpected error occurred!");
         }

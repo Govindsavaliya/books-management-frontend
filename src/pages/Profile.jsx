@@ -22,7 +22,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (user?.data) {
-      setUserProfile(user.data);
+      setUserProfile(user?.data);
     }
   }, [user]);
 
@@ -70,9 +70,9 @@ const Profile = () => {
               fullWidth
               sx={{
                 marginBottom: 2,
-                backgroundColor: "#4CAF50", // Soft green for buttons
+                backgroundColor: "#4CAF50",
                 "&:hover": {
-                  backgroundColor: "#388E3C",  // Darker green on hover
+                  backgroundColor: "#388E3C",
                 },
               }}
             >
@@ -84,10 +84,10 @@ const Profile = () => {
               href="/add"
               fullWidth
               sx={{
-                borderColor: "#FF6347",  // Tomato color for button border
-                color: "#FF6347",  // Tomato color for button text
+                borderColor: "#FF6347",
+                color: "#FF6347",
                 "&:hover": {
-                  backgroundColor: "#FF6347", // Tomato color on hover
+                  backgroundColor: "#FF6347",
                   color: "#fff",
                 },
               }}

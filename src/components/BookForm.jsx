@@ -26,8 +26,7 @@ const BookForm = () => {
         dispatch(addBook({ title, author }))
             .unwrap()
             .then((messageInfo) => {
-                toast.success(messageInfo.message);
-                console.log("🚀 ~ .then ~ messageInfo:", messageInfo)
+                toast.success(messageInfo?.message);
                 navigate("/");
             })
             .catch((error) => {
@@ -41,7 +40,7 @@ const BookForm = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                minHeight: "100vh", 
+                minHeight: "100vh",
                 backgroundColor: (theme) =>
                     theme.palette.mode === "dark" ? "#121212" : "#f9f9f9",
             }}

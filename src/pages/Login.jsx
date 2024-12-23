@@ -23,19 +23,19 @@ const Login = () => {
     dispatch(loginUser({ email, password }))
       .unwrap()
       .then((messageInfo) => {
-        toast.success(messageInfo.message);
-        localStorage.setItem("token", messageInfo.data.token);
+        toast.success(messageInfo?.message);
+        localStorage.setItem("token", messageInfo?.data?.token);
         navigate("/");
         setEmail("");
         setPassword("");
       })
       .catch((err) => {
-        if (err.message) {
-          toast.error(err.message);
+        if (err?.message) {
+          toast.error(err?.message);
         }
-        else if (err.errors) {
-          err.errors.forEach((error) => {
-            toast.error(error.msg);
+        else if (err?.errors) {
+          err?.errors.forEach((error) => {
+            toast.error(error?.msg);
           });
         }
         else {
