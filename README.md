@@ -1,70 +1,163 @@
-# Getting Started with Create React App
+# Books Management Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React.js-based frontend application for managing books, interacting with the Books Management Backend API. It includes functionalities such as user registration, login, and managing books.
 
-## Available Scripts
+## Features
+- **User Authentication**: Register, login, and manage session.
+- **Books Management**: View and add books.
+- **API Integration**: Interact with the backend API for data retrieval and manipulation.
+- **Responsive UI**: User-friendly interface for managing books and user information.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Prerequisites
+Before setting up the project, ensure you have the following installed:
+- **Node.js**: v14.x or higher
+- **npm**: Comes with Node.js
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/Govindsavaliya/books-management-frontend.git
+   cd books-management-frontend
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Install Dependencies**  
+   Install the required dependencies using npm:
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+3. **Run the Application**  
+   Start the application in development mode:
+   ```bash
+   npm start
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Access the Application**  
+   The frontend will be available at [http://localhost:3000](http://localhost:3000).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Folder Structure
 
-### `npm run eject`
+```
+.
+├── public
+│   └── index.html
+├── src
+│   ├── app
+│   │   ├── store.js
+│   ├── components
+│   │   ├── BookList.jsx
+│   │   ├── BookForm.jsx
+│   ├── features
+│   │   └── authSlice.js
+│   │   └── booksSlice.js
+│   ├── pages
+│   │   └── Login.jsx
+│   │   └── Profile.jsx
+│   │   └── Register.jsx
+│   ├── App.js
+│   ├── config.js
+│   ├── index.js
+│   └── index.css
+├── package.json
+├── vercel.json
+└── README.md
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## How to Use the Application
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Register a User
+- Navigate to the **Register** page.
+- Form fields:
+  - First Name
+  - Last Name
+  - Email
+  - Password
+  - Confirm Password
+- When the user submits the form, the data is sent to the backend to register.
 
-## Learn More
+### Login a User
+- Navigate to the **Login** page.
+- Form fields:
+  - Email
+  - Password
+- On successful login, the user will be redirected to the dashboard and the JWT token will be saved in localStorage for authentication.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Get User Info
+- The **User Info** section displays the logged-in user's details. The JWT token is required to fetch this information.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Add a Book
+- Navigate to the **Add Book** page.
+- Provide the title and author of the book to add it to the system.
 
-### Code Splitting
+### Get All Books
+- The **Dashboard** page displays a list of all books retrieved from the backend.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## API Integration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The frontend communicates with the backend via the following API endpoints:
 
-### Making a Progressive Web App
+- **User Registration**:  
+  `POST /register`  
+  Request Body:
+  ```json
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "password": "password123",
+    "confirmPassword": "password123"
+  }
+  ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **User Login**:  
+  `POST /login`  
+  Request Body:
+  ```json
+  {
+    "email": "john.doe@example.com",
+    "password": "password123"
+  }
+  ```
 
-### Advanced Configuration
+- **Get User Info**:  
+  `GET /user-info`  
+  Headers:  
+  ```plaintext
+  Authorization: Bearer <your_jwt_token>
+  ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **Add a Book**:  
+  `POST /books`  
+  Request Body:
+  ```json
+  {
+    "title": "Book Title",
+    "author": "Author Name"
+  }
+  ```
 
-### Deployment
+- **Get All Books**:  
+  `GET /books`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## Technologies Used
+- **React.js**: Frontend framework.
+- **Axios**: HTTP client for API requests.
+- **React Router**: For routing between pages.
+- **Redux**: State management library for managing global application state.
+- **Material-UI**: UI component library for building responsive and modern user interfaces.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---

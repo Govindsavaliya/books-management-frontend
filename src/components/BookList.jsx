@@ -3,7 +3,6 @@ import {
     Grid,
     Card,
     CardContent,
-    CardMedia,
     Typography,
     Button,
     CircularProgress,
