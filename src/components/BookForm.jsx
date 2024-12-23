@@ -20,18 +20,21 @@ const BookForm = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-
-        // Dispatch addBook action
-        dispatch(addBook({ title, author }))
-            .unwrap()
-            .then((messageInfo) => {
-                toast.success(messageInfo?.message);
-                navigate("/");
-            })
-            .catch((error) => {
-                console.error("Error adding book:", error);
-            });
+        try {
+            e.preventDefault();
+            // Dispatch addBook action
+            dispatch(addBook({ title, author }))
+                .unwrap()
+                .then((messageInfo) => {
+                    toast.success(messageInfo?.message);
+                    navigate("/");
+                })
+                .catch((error) => {
+                    console.error("Error adding book:", error);
+                });
+        } catch (error) {
+            toast.error(error?.message);
+        }
     };
 
     return (

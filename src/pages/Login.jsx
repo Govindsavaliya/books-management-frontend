@@ -19,29 +19,33 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(loginUser({ email, password }))
-      .unwrap()
-      .then((messageInfo) => {
-        toast.success(messageInfo?.message);
-        localStorage.setItem("token", messageInfo?.data?.token);
-        navigate("/");
-        setEmail("");
-        setPassword("");
-      })
-      .catch((err) => {
-        if (err?.message) {
-          toast.error(err?.message);
-        }
-        else if (err?.errors) {
-          err?.errors.forEach((error) => {
-            toast.error(error?.msg);
-          });
-        }
-        else {
-          toast.error("An unexpected error occurred!");
-        }
-      });
+    try {
+      e.preventDefault();
+      dispatch(loginUser({ email, password }))
+        .unwrap()
+        .then((messageInfo) => {
+          toast.success(messageInfo?.message);
+          localStorage.setItem("token", messageInfo?.data?.token);
+          navigate("/");
+          setEmail("");
+          setPassword("");
+        })
+        .catch((err) => {
+          if (err?.message) {
+            toast.error(err?.message);
+          }
+          else if (err?.errors) {
+            err?.errors.forEach((error) => {
+              toast.error(error?.msg);
+            });
+          }
+          else {
+            toast.error("An unexpected error occurred!");
+          }
+        });
+    } catch (error) {
+      toast.error(error?.message);
+    }
   };
 
   return (

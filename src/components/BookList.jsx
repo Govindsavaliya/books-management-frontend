@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from "../features/booksSlice";
+import { toast } from "react-toastify";
 
 // Dark theme for the app
 const darkTheme = createTheme({
@@ -43,11 +44,15 @@ const darkTheme = createTheme({
 
 const BookList = () => {
     const dispatch = useDispatch();
-    const { books, loading, error } = useSelector((state) => state.books);
+    const { books, loading } = useSelector((state) => state.books);
 
     // Fetch books
     useEffect(() => {
-        dispatch(fetchBooks());
+        try {
+            dispatch(fetchBooks());
+        } catch (error) {
+            toast.error(error?.message);
+        }
     }, [dispatch]);
 
     if (loading)
@@ -63,24 +68,6 @@ const BookList = () => {
                 }}
             >
                 <CircularProgress style={{ color: "#90caf9" }} />
-            </Container>
-        );
-
-    if (error)
-        return (
-            <Container
-                maxWidth="xl"
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100vh",
-                    backgroundColor: "#121212",
-                }}
-            >
-                <Typography variant="h6" color="error">
-                    Error: {error}
-                </Typography>
             </Container>
         );
 
@@ -114,7 +101,7 @@ const BookList = () => {
                     </AppBar>
 
                     <Box sx={{ marginTop: "20px" }}>
-                        {books.data?.length === 0 && (
+                        {books?.length === 0 && (
                             <Typography
                                 variant="h6"
                                 align="center"
@@ -157,7 +144,7 @@ const BookList = () => {
                                                     style={{
                                                         textAlign: "center",
                                                         fontWeight: "bold",
-                                                        color: "#90caf9", // Title with a custom color
+                                                        color: "#90caf9",
                                                     }}
                                                 >
                                                     {book?.title}

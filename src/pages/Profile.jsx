@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfile } from "../features/authSlice";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -17,12 +18,20 @@ const Profile = () => {
   const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchProfile());
+    try {
+      dispatch(fetchProfile());
+    } catch (error) {
+      toast.error(error?.message);
+    }
   }, [dispatch]);
 
   useEffect(() => {
-    if (user?.data) {
-      setUserProfile(user?.data);
+    try {
+      if (user?.data) {
+        setUserProfile(user?.data);
+      }
+    } catch (error) {
+      toast.error(error?.message);
     }
   }, [user]);
 
